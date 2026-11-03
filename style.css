@@ -1,0 +1,123 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --navy: #12303a;
+  --navy-soft: #1d4452;
+  --accent: #1c8aa5;
+  --ink: #1f2933;
+  --muted: #5f6b76;
+  --line: #e3e8ec;
+  --bg: #e9eef1;
+  --paper: #ffffff;
+  --heading: "Poppins", system-ui, sans-serif;
+  --body: "Inter", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  line-height: 1.6;
+}
+
+a { color: inherit; text-underline-offset: 3px; }
+a:focus-visible, .skip-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.skip-link { position: absolute; left: -999px; background: #fff; padding: .5rem 1rem; }
+.skip-link:focus { left: 1rem; top: 1rem; }
+
+/* ---------- Layout: dark sidebar + light content ---------- */
+.page {
+  max-width: 62rem;
+  margin: 2rem auto;
+  background: var(--paper);
+  box-shadow: 0 4px 24px rgba(18, 48, 58, .12);
+  display: grid;
+  grid-template-columns: 18rem 1fr;
+  grid-template-areas:
+    "side head"
+    "side main";
+}
+
+.sidebar { grid-area: side; background: var(--navy); color: #e7f0f3; padding: 2.5rem 1.75rem; }
+.masthead { grid-area: head; padding: 2.5rem 2.5rem 1.5rem; border-bottom: 1px solid var(--line); }
+main { grid-area: main; padding: 1.75rem 2.5rem 2.5rem; }
+
+/* ---------- Headings ---------- */
+h1, h2, h3 { font-family: var(--heading); margin: 0; line-height: 1.25; }
+h1 { font-size: 2.75rem; font-weight: 700; color: var(--navy); letter-spacing: -.01em; }
+.role { margin: .35rem 0 0; font-size: 1.125rem; font-weight: 500; color: var(--accent); }
+
+main h2 {
+  font-size: .9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--navy);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+main h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+h3 { font-size: 1.05rem; font-weight: 600; color: var(--ink); }
+
+/* ---------- Main content ---------- */
+section { margin-bottom: 2rem; }
+main article { margin-bottom: 1.25rem; padding-left: 1rem; border-left: 3px solid var(--accent); }
+article header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0 1rem; }
+.meta { margin: 0; color: var(--muted); font-size: .875rem; font-weight: 500; }
+.school { margin: .15rem 0 .35rem; font-weight: 500; }
+article p { margin: .25rem 0 .4rem; }
+article ul { margin: .35rem 0 0; padding-left: 1.1rem; }
+article li { margin-bottom: .2rem; }
+
+/* ---------- Sidebar ---------- */
+.sidebar h2 {
+  font-size: .8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: #8fd0e2;
+  padding-bottom: .5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .15);
+}
+.sidebar h3 { font-size: .9rem; font-weight: 600; color: #fff; margin: 1.1rem 0 .5rem; }
+.sidebar h2 + h3 { margin-top: 0; }
+
+address { font-style: normal; }
+.contact { list-style: none; margin: 0; padding: 0; font-size: .9rem; word-break: break-word; }
+.contact li { margin-bottom: .85rem; }
+.contact span { display: block; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: #8fd0e2; }
+.contact a { text-decoration: none; }
+.contact a:hover { text-decoration: underline; }
+
+.tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.tags li {
+  background: var(--navy-soft);
+  color: #fff;
+  font-size: .8rem;
+  padding: .2rem .65rem;
+  border-radius: 6px;
+}
+.sidebar section { margin-bottom: 2rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+  .page { margin: 0; grid-template-columns: 1fr; grid-template-areas: "head" "main" "side"; }
+  .masthead, main { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .sidebar { padding: 1.75rem 1.25rem; }
+  h1 { font-size: 2.25rem; }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; max-width: none; }
+  .sidebar, .tags li { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .skip-link { display: none; }
+}
